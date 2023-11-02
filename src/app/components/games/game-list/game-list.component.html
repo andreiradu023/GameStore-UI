@@ -1,0 +1,46 @@
+<div style="background-color: red;">
+  <div class="container-fluid" style="margin-top: 10px;">
+    <button type="button" class="btn btn-success" (click)="onNewGame()">New Game</button>
+    <button type="button" class="btn btn-success" style="margin-left: 10px;"
+            (click)="refreshGames()">
+      <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
+      <i *ngIf="!refreshing" class="fas fa-sync"></i>
+    </button>
+    <table class="table table-borderless table-hover">
+      <thead>
+      <tr class="text-center">
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Platform</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Stock Quantity</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" *ngFor="let game of games; let i=index">
+        <td>{{ game.id }}</td>
+        <td>{{ game.title }}</td>
+        <td>{{ game.platform }}</td>
+        <td>{{ game.genre }}</td>
+        <td>{{ game.description }}</td>
+        <td>{{ game.price }}</td>
+        <td>{{ game.image }}</td>
+        <td>{{ game.releaseDate }}</td>
+        <td>{{ game.stockQuantity }}</td>
+        <button type="button" (click)="onViewDetails(game.id)" class="btn btn-info">
+          <i class="fas fa-book-open"></i></button>
+        <button type="button" style="margin-left: 10px;" (click)="onEdit(game.id)" class="btn btn-primary">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button type="button" style="margin-left: 10px;" (click)="onDelete(game.id)" class="btn btn-danger">
+          <i class="fas fa-trash"></i></button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
