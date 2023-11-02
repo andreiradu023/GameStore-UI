@@ -13,9 +13,16 @@ import {OrdersComponent} from "./components/orders/orders.component";
 import {OrderListComponent} from "./components/orders/order-list/order-list.component";
 import {OrderEditComponent} from "./components/orders/order-edit/order-edit.component";
 import {OrderDetailsComponent} from "./components/orders/order-details/order-details.component";
+import {GameHomeComponent} from "./components/games/game-home/game-home.component";
+import {GamePageComponent} from "./components/games/game-page/game-page.component";
+import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
+import {LoginComponent} from "./components/login/login.component";
+import {LogoutComponent} from "./components/logout/logout.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'games', component: GameHomeComponent},
+  {path:'games/:id',component: GamePageComponent},
   {path: 'admin/games', component: GamesComponent,
     children: [
       { path: '', component: GameListComponent},
@@ -39,7 +46,10 @@ const routes: Routes = [
       {path: ':id', component: OrderDetailsComponent},
       {path: 'edit/:id', component: OrderEditComponent},
     ]
-  }
+  },
+  {path: 'cart', component: ShoppingCartComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({

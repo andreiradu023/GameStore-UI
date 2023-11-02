@@ -1,0 +1,38 @@
+<div class="section-content section-content-p30">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="product-box">
+        <div>
+          <h3>{{ game.title }}</h3>
+        </div>
+        <img
+          src="https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg"
+          class="img-responsive"
+          style="max-width: 100%; height: auto" alt="Game image"
+        />
+        <div class="price">{{ game.price }}$</div>
+        <a href="#" class="btn btn-primary">Add to cart</a>
+
+        <hr/>
+        <h4>Description</h4>
+        <p>{{ game.description }}</p>
+        <hr/>
+        <table class="table table-striped specifications-table">
+          <tbody *ngIf="game">
+          <tr>
+            <td class="col-xs-8">{{ game.genre }}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-8">{{ game.platform }}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-8">{{ game.releaseDate }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,24 @@
+<div class="main-content" style="margin-top: 15px">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div *ngFor="let game of games" class="col-md-3">
+          <div class="game-box">
+            <a class="text-decoration-none link-dark" routerLink="/games/{{game.id}}">
+              <img src="https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg"
+                   class="img-responsive" style="max-width:100%; height:auto" alt="Game image">
+              <div>
+                <h1 *ngIf="game.title.length<=78">{{ game.title }}</h1>
+                <h1 *ngIf="game.title.length>78">{{ game.title.substring(0,78)}}...</h1>
+              </div>
+            </a>
+            <div class="price">{{ game.price }}$</div>
+            <a href="#" class="btn btn-primary">Add to cart</a>
+          </div>
+        </div>
+        <div *ngIf="games && games.length === 0" class="col-md-3"><span>No game is available yet.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
