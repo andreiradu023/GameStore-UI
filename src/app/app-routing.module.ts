@@ -9,6 +9,10 @@ import {UsersComponent} from "./components/users/users.component";
 import {UserListComponent} from "./components/users/user-list/user-list.component";
 import {UserDetailsComponent} from "./components/users/user-details/user-details.component";
 import {UserEditComponent} from "./components/users/user-edit/user-edit.component";
+import {OrdersComponent} from "./components/orders/orders.component";
+import {OrderListComponent} from "./components/orders/order-list/order-list.component";
+import {OrderEditComponent} from "./components/orders/order-edit/order-edit.component";
+import {OrderDetailsComponent} from "./components/orders/order-details/order-details.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,6 +30,14 @@ const routes: Routes = [
       {path: 'new', component: UserEditComponent},
       {path: ':id', component: UserDetailsComponent},
       {path: 'edit/:id', component: UserEditComponent}
+    ]
+  },
+  {path:'admin/orders', component: OrdersComponent,
+    children: [
+      {path: '', component: OrderListComponent},
+      {path: 'new', component: OrderEditComponent},
+      {path: ':id', component: OrderDetailsComponent},
+      {path: 'edit/:id', component: OrderEditComponent},
     ]
   }
 ];

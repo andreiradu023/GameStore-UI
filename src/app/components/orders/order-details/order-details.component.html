@@ -1,0 +1,46 @@
+<div class="col-md-4 offset-md-4" style="margin-top: 2%">
+  <h3>{{order.user}}'s details</h3>
+  <div class="row">
+    <label>User</label>
+    <input
+      type="text"
+      class="form-control"
+      [ngModel]="order.user"
+      name="user"
+      disabled
+    />
+  </div>
+
+  <div class="row">
+    <label>Order Date</label>
+    <input
+      type="date"
+      class="form-control"
+      [ngModel]="order.orderDate"
+      name="orderDate"
+      disabled
+    />
+  </div>
+
+  <div class="row">
+    <label>Total Price</label>
+    <input
+      type="number"
+      class="form-control"
+      [ngModel]="order.totalPrice"
+      name="totalPrice"
+      disabled
+    />
+  </div>
+
+  <div class="row">
+    <label>Order Items</label>
+    <input
+      type="text"
+      class="form-control"
+      [ngModel]="order.orderItems"
+      name="orderItems"
+      disabled
+    />
+  </div>
+</div>

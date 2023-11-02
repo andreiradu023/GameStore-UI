@@ -16,6 +16,10 @@ import {FormsModule} from "@angular/forms";
 import {UserListComponent} from './components/users/user-list/user-list.component';
 import {GameListComponent} from './components/games/game-list/game-list.component';
 import {GameEditComponent} from './components/games/game-edit/game-edit.component';
+import {OrdersComponent} from './components/orders/orders.component';
+import {OrderDetailsComponent} from './components/orders/order-details/order-details.component';
+import {OrderEditComponent} from './components/orders/order-edit/order-edit.component';
+import {OrderListComponent} from './components/orders/order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import {GameEditComponent} from './components/games/game-edit/game-edit.componen
     UserEditComponent,
     UserListComponent,
     GameListComponent,
-    GameEditComponent
+    GameEditComponent,
+    OrdersComponent,
+    OrderDetailsComponent,
+    OrderEditComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,

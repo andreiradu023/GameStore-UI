@@ -1,0 +1,37 @@
+<div style="background-color: red;">
+  <div class="container-fluid" style="margin-top: 10px;">
+    <button type="button" class="btn btn-success" (click)="onNewOrder()">New User</button>
+    <button type="button" class="btn btn-success" style="margin-left: 10px;"
+            (click)="refreshOrders()">
+      <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
+      <i *ngIf="!refreshing" class="fas fa-sync"></i>
+    </button>
+    <table class="table table-borderless table-hover">
+      <thead>
+      <tr class="text-center">
+        <th scope="col">Id</th>
+        <th scope="col">User</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Order Items</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" *ngFor="let orders of orders">
+        <td>{{ orders.id }}</td>
+        <td>{{ orders.user.firstName }} {{orders.user.lastName}}</td>
+        <td>{{ orders.orderDate }}</td>
+        <td>{{ orders.totalPrice }}</td>
+        <td>{{ orders.orderItems }}</td>
+        <button type="button" (click)="onViewDetails(orders.id)" class="btn btn-info">
+          <i class="fas fa-book-open"></i></button>
+        <button type="button" style="margin-left: 10px;" (click)="onEdit(orders.id)" class="btn btn-primary">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button type="button" style="margin-left: 10px;" (click)="onDelete(orders.id)" class="btn btn-danger">
+          <i class="fas fa-trash"></i></button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
