@@ -1,0 +1,61 @@
+<div class="col-md-4 offset-md-4" style="margin-top: 2%">
+  <h3 *ngIf="isAddMode">Add new user</h3>
+  <h3 *ngIf="!isAddMode">Update user</h3>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-group">
+      <label>First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        [(ngModel)]="user.firstName"
+        name="firstName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        [(ngModel)]="user.lastName"
+        name="lastName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>E-mail</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        [(ngModel)]="user.email"
+        name="email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phoneNumber"
+        [(ngModel)]="user.phone"
+        name="phoneNumber"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        [(ngModel)]="user.address"
+        name="address"
+      />
+    </div>
+    <button class="btn btn-success" type="submit" style="margin-bottom: 50px;">Submit</button>
+  </form>
+</div>
