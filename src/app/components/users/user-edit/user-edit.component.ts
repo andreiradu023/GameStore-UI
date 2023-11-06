@@ -13,6 +13,7 @@ export class UserEditComponent implements OnInit {
   id!: string;
   user: User = new User();
   isAddMode!: boolean;
+  roles: string[] = ['ADMIN', 'USER'];
 
   constructor(
     private userService: UserService,

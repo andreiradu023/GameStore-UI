@@ -18,12 +18,13 @@ import {GamePageComponent} from "./components/games/game-page/game-page.componen
 import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
 import {LoginComponent} from "./components/login/login.component";
 import {LogoutComponent} from "./components/logout/logout.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'games', component: GameHomeComponent},
   {path:'games/:id',component: GamePageComponent},
-  {path: 'admin/games', component: GamesComponent,
+  {path: 'admin/games', component: GamesComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: GameListComponent},
       {path: 'new', component: GameEditComponent},
@@ -31,7 +32,7 @@ const routes: Routes = [
       {path: 'edit/:id', component: GameEditComponent}
     ]
   },
-  {path: 'admin/users', component: UsersComponent,
+  {path: 'admin/users', component: UsersComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: UserListComponent},
       {path: 'new', component: UserEditComponent},
@@ -39,7 +40,7 @@ const routes: Routes = [
       {path: 'edit/:id', component: UserEditComponent}
     ]
   },
-  {path:'admin/orders', component: OrdersComponent,
+  {path:'admin/orders', component: OrdersComponent, canActivate: [AuthGuard],
     children: [
       {path: '', component: OrderListComponent},
       {path: 'new', component: OrderEditComponent},
@@ -47,7 +48,7 @@ const routes: Routes = [
       {path: 'edit/:id', component: OrderEditComponent},
     ]
   },
-  {path: 'cart', component: ShoppingCartComponent},
+  {path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent }
 ];

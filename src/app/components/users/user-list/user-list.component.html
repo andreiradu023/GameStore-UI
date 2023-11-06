@@ -25,6 +25,13 @@
         <td>{{ user.email }}</td>
         <td>{{ user.phone }}</td>
         <td>{{ user.address }}</td>
+        <td *ngIf="user.roles[0]">
+                    <span *ngFor="let role of user.roles; let i=index">
+                        {{ user.roles[i].name }}<span *ngIf="user.roles.length>1 && i < user.roles.length-1">,</span>
+                    </span>
+        </td>
+        <td *ngIf="!user.roles[0]"> NONE</td>
+        <td>
         <button type="button" (click)="onViewDetails(user.id)" class="btn btn-info">
           <i class="fas fa-book-open"></i></button>
         <button type="button" style="margin-left: 10px;" (click)="onEdit(user.id)" class="btn btn-primary">

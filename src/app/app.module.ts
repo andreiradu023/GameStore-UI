@@ -8,7 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GamesComponent } from './components/games/games.component';
 import { GameDetailsComponent } from './components/games/game-details/game-details.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {UsersComponent} from "./components/users/users.component";
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
@@ -25,6 +25,7 @@ import { GameHomeComponent } from './components/games/game-home/game-home.compon
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import {AuthInterceptorService} from "./auth/auth-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { LogoutComponent } from './components/logout/logout.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,7 +15,7 @@
         </li>
       </ul>
     </div>
-    <ul class="navbar-nav navbar-right">
+    <ul class="navbar-nav navbar-right" *ngIf="isAuthenticated">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Admin
@@ -26,7 +26,7 @@
           <li><a class="dropdown-item" routerLink="admin/orders">Orders</a></li>
         </ul>
       </div>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isAuthenticated">
         <a class="nav-link" routerLink="cart"><i class="fas fa-shopping-cart fa-lg"
                                                  style="color: #ff0000;"></i></a>
       </li>

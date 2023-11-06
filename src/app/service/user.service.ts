@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, map} from "rxjs";
 import {User} from "../models/user";
 import {HttpClient} from "@angular/common/http";
 import {API_URL} from "../../app.constants";
@@ -13,7 +13,13 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAllUsers() {
-    return this.http.get<User[]>(`${API_URL}/users`);
+    return this.http.get<User[]>(`${API_URL}/users`).pipe(
+      map((users) => {
+        return users.map((user) => {
+          return { ...user, roles: user.roles ? user.roles : [] };
+        });
+      })
+    );
   }
 
   getUser(id: string) {

@@ -56,6 +56,20 @@
         name="address"
       />
     </div>
+
+    <div class="form-group">
+      <label>Roles</label><br />
+      <div *ngFor="let role of roles; let i = index">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          ngModel
+          name="{{'roles'+i}}"
+          [value]="role"
+        />
+        <label class="form-check-label" for="adminCheck"> {{ role }} </label>
+      </div>
+    </div>
     <button class="btn btn-success" type="submit" style="margin-bottom: 50px;">Submit</button>
   </form>
 </div>

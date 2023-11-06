@@ -5,4 +5,9 @@ export class User {
   email!: string;
   phone!: string;
   address!: string;
+  roles!: Role[];
+}
+
+export class Role {
+  name!: string;
 }

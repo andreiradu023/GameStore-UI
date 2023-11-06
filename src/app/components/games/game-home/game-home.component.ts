@@ -35,6 +35,7 @@ export class GameHomeComponent implements OnInit, OnDestroy{
           console.log(data);
           this.games = data;
         }, error => {
+          console.log(this.games)
           console.log(error);
         }
       )
