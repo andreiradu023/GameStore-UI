@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../../models/user";
 import {UserService} from "../../../service/user.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-details',
@@ -14,6 +14,7 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private router: Router,
     private route: ActivatedRoute) {
   }
 
@@ -26,4 +27,7 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
+  goToUserList() {
+    this.router.navigate(['admin/users']);
+  }
 }

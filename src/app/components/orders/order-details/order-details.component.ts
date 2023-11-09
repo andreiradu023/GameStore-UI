@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Order} from "../../../models/order";
 import {OrderService} from "../../../service/order.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-order-details',
@@ -14,6 +14,7 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
+    private router: Router,
     private route: ActivatedRoute) {
   }
 
@@ -23,7 +24,11 @@ export class OrderDetailsComponent implements OnInit {
     })
     this.orderService.getOrders(this.id).subscribe(response => {
       this.order = response;
+      console.log(response)
     });
   }
 
+  goToOrderList() {
+    this.router.navigate(['admin/orders']);
+  }
 }

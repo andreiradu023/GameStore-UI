@@ -1,57 +1,69 @@
-<div class="col-md-4 offset-md-4" style="margin-top: 2%">
-  <h3>{{user.firstName}} {{user.lastName}}'s details</h3>
-  <div class="row">
-    <label>First Name</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="user.firstName"
-      name="firstName"
-      disabled
-    />
-  </div>
+<div class="container mt-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="row">
+      <h4 class="d-flex justify-content-center align-items-center">
+        {{ user.firstName }} {{ user.lastName }}'s details
+      </h4>
+    </div>
 
-  <div class="row">
-    <label>Last Name</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="user.lastName"
-      name="lastName"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="user.firstName"
+        name="firstName"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>E-mail</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="user.email"
-      name="email"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="user.lastName"
+        name="lastName"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Phone</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="user.phone"
-      name="phone"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>E-mail</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="user.email"
+        name="email"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Address</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="user.address"
-      name="address"
-      disabled
-    />
+    <div class="row">
+      <label>Phone</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="user.phone"
+        name="phone"
+        disabled
+      />
+    </div>
+
+    <div class="row">
+      <label>Address</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="user.address"
+        name="address"
+        disabled
+      />
+    </div>
+    <div class="row mt-2">
+      <button class="btn btn-success" type="button" (click)="goToUserList()">
+        Back
+      </button>
+    </div>
   </div>
 </div>

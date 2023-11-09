@@ -1,4 +1,4 @@
-import {APP_ID, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Game} from "../models/game";
 import {HttpClient} from "@angular/common/http";
@@ -17,6 +17,10 @@ export class GameService {
 
   getAllGames() {
     return this.http.get<Game[]>(`${API_URL}/games`);
+  }
+
+  getAllGamesByPage(page: number) {
+    return this.http.get<Game[]>(`${API_URL}/games/page/${page}`);
   }
 
   getGames(id: string) {

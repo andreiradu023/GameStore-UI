@@ -19,28 +19,32 @@ import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.co
 import {LoginComponent} from "./components/login/login.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 import {AuthGuard} from "./auth/auth.guard";
+import {CheckoutComponent} from "./components/checkout/checkout.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'games', component: GameHomeComponent},
-  {path:'games/:id',component: GamePageComponent},
-  {path: 'admin/games', component: GamesComponent, canActivate: [AuthGuard],
+  {path: 'games/:id', component: GamePageComponent},
+  {
+    path: 'admin/games', component: GamesComponent, canActivate: [AuthGuard],
     children: [
-      { path: '', component: GameListComponent},
+      {path: '', component: GameListComponent},
       {path: 'new', component: GameEditComponent},
       {path: ':id', component: GameDetailsComponent},
       {path: 'edit/:id', component: GameEditComponent}
     ]
   },
-  {path: 'admin/users', component: UsersComponent, canActivate: [AuthGuard],
+  {
+    path: 'admin/users', component: UsersComponent, canActivate: [AuthGuard],
     children: [
-      { path: '', component: UserListComponent},
+      {path: '', component: UserListComponent},
       {path: 'new', component: UserEditComponent},
       {path: ':id', component: UserDetailsComponent},
       {path: 'edit/:id', component: UserEditComponent}
     ]
   },
-  {path:'admin/orders', component: OrdersComponent, canActivate: [AuthGuard],
+  {
+    path: 'admin/orders', component: OrdersComponent, canActivate: [AuthGuard],
     children: [
       {path: '', component: OrderListComponent},
       {path: 'new', component: OrderEditComponent},
@@ -49,8 +53,9 @@ const routes: Routes = [
     ]
   },
   {path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuard]},
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent }
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LogoutComponent}
 ];
 
 @NgModule({

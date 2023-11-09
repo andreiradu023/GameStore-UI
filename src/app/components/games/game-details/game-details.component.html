@@ -1,90 +1,103 @@
-<div class="col-md-4 offset-md-4" style="margin-top: 2%">
-  <h3>{{game.title}}'s details</h3>
-  <div class="row">
-    <label>Title</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="game.title"
-      name="title"
-      disabled
-    />
-  </div>
+<div class="container mt-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="row">
+      <h4 class="d-flex justify-content-center align-items-center">
+        {{ game.title }}'s details
+      </h4>
+    </div>
 
-  <div class="row">
-    <label>Platform</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="game.platform"
-      name="platform"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Title</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="game.title"
+        name="title"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Genre</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="game.genre"
-      name="genre"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Platform</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="game.platform"
+        name="platform"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Description</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="game.description"
-      name="description"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Genre</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="game.genre"
+        name="genre"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Price</label>
-    <input
-      type="number"
-      class="form-control"
-      [ngModel]="game.price"
-      name="price"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Description</label>
+      <textarea
+        class="form-control"
+        [(ngModel)]="game.description"
+        name="description"
+        disabled
+        rows="7"
+      ></textarea>
+    </div>
 
-  <div class="row">
-    <label>Image</label>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="game.image"
-      name="image"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Price</label>
+      <input
+        type="number"
+        class="form-control"
+        [ngModel]="game.price"
+        name="price"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Release Date</label>
-    <input
-      type="date"
-      class="form-control"
-      [ngModel]="game.releaseDate"
-      name="releaseDate"
-      disabled
-    />
-  </div>
+    <div class="row">
+      <label>Image</label>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="game.image"
+        name="image"
+        disabled
+      />
+    </div>
 
-  <div class="row">
-    <label>Stock Quantity</label>
-    <input
-      type="number"
-      class="form-control"
-      [ngModel]="game.stockQuantity"
-      name="stockQuantity"
-      disabled
-    />
+    <div class="row">
+      <label>Release Date</label>
+      <input
+        type="date"
+        class="form-control"
+        [ngModel]="game.releaseDate"
+        name="releaseDate"
+        disabled
+      />
+    </div>
+
+    <div class="row">
+      <label>Stock Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        [ngModel]="game.stockQuantity"
+        name="stockQuantity"
+        disabled
+      />
+    </div>
+
+    <div class="row mt-2">
+      <button class="btn btn-success" type="button" (click)="goToGameList()">
+        Back
+      </button>
+    </div>
   </div>
 </div>

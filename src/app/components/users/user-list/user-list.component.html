@@ -1,12 +1,38 @@
-<div style="background-color: red;">
-  <div class="container-fluid" style="margin-top: 10px;">
-    <button type="button" class="btn btn-success" (click)="onNewUser()">New User</button>
-    <button type="button" class="btn btn-success" style="margin-left: 10px;"
-            (click)="refreshUsers()">
-      <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
-      <i *ngIf="!refreshing" class="fas fa-sync"></i>
-    </button>
-    <table class="table table-borderless table-hover">
+<div class="table-responsive container-fluid mt-3">
+  <div class="row justify-content-between mt-2">
+    <div class="col-4">
+      <div class="d-flex">
+        <h3 class="me-2">User list:</h3>
+        <button
+          type="button"
+          class="btn btn-sm btn-warning me-2"
+          (click)="onNewUser()"
+        >
+          New User
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-success"
+          (click)="refreshUsers()"
+        >
+          <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
+          <i *ngIf="!refreshing" class="fas fa-sync"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-2">
+      <input
+        type="search"
+        class="form-control"
+        placeholder="Search..."
+        autocomplete="off"
+        style="position: relative; vertical-align: top"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-sm table-striped table-hover caption-top">
       <thead>
       <tr class="text-center">
         <th scope="col">Id</th>
@@ -15,6 +41,8 @@
         <th scope="col">E-mail</th>
         <th scope="col">Phone</th>
         <th scope="col">Address</th>
+        <th scope="col">Role</th>
+        <th scope="col" colspan="3">Action</th>
       </tr>
       </thead>
       <tbody>
@@ -26,21 +54,115 @@
         <td>{{ user.phone }}</td>
         <td>{{ user.address }}</td>
         <td *ngIf="user.roles[0]">
-                    <span *ngFor="let role of user.roles; let i=index">
-                        {{ user.roles[i].name }}<span *ngIf="user.roles.length>1 && i < user.roles.length-1">,</span>
-                    </span>
+            <span *ngFor="let role of user.roles; let i = index">
+              {{ user.roles[i].name
+              }}<span *ngIf="user.roles.length > 1 && i < user.roles.length - 1"
+            >,</span
+            >
+            </span>
         </td>
-        <td *ngIf="!user.roles[0]"> NONE</td>
+        <td *ngIf="!user.roles[0]">NONE</td>
         <td>
-        <button type="button" (click)="onViewDetails(user.id)" class="btn btn-info">
-          <i class="fas fa-book-open"></i></button>
-        <button type="button" style="margin-left: 10px;" (click)="onEdit(user.id)" class="btn btn-primary">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button type="button" style="margin-left: 10px;" (click)="onDelete(user.id)" class="btn btn-danger">
-          <i class="fas fa-trash"></i></button>
+          <button
+            type="button"
+            (click)="onViewDetails(user.id)"
+            class="btn btn-sm btn-primary"
+          >
+            <i class="fas fa-book-open"></i>
+          </button>
+        </td>
+
+        <td>
+          <button
+            type="button"
+            style="margin-left: 10px"
+            (click)="onEdit(user.id)"
+            class="btn btn-sm btn-success"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
+
+        <td>
+          <button
+            type="button"
+            style="margin-left: 10px"
+            (click)="onDelete(user.id)"
+            class="btn btn-sm btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="row justify-content-between mt-2">
+    <div class="col-2">
+      <div class="input-group mb-3">
+        <select class="form-select" id="inputGroupSelect02">
+          <option selected>Table Size...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">5</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-end">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete user: xyz</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this item / items?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">Yes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
   </div>
 </div>

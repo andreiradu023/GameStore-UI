@@ -1,23 +1,83 @@
-<div class="main-content" style="margin-top: 15px">
+<div class="main-content mt-4">
   <div class="section-content section-content-p30">
-    <div class="container-fluid">
-      <div class="row">
+    <div class="container-fluid bg-body-tertiary">
+      <div class="row bg-body-secondary">
+        <section class="py-5 text-center container">
+          <div class="row py-lg-2">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">Game Store</h1>
+              <p class="lead text-body-secondary">
+                Discover the world of games! We offer the latest and most
+                popular titles for all platforms. With competitive prices and
+                fast delivery, we make sure to satisfy you gaming desires.
+                Benefit from exclusive promotions and secure shopping
+                experience. Choose Game Store for exciting adventures and
+                unlimited fun!
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
 
-        <div *ngFor="let game of games" class="col-md-3">
-          <div class="game-box">
-            <a class="text-decoration-none link-dark" routerLink="/games/{{game.id}}">
-              <img src="https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg"
-                   class="img-responsive" style="max-width:100%; height:auto" alt="Game image">
-              <div>
-                <h1 *ngIf="game.title.length<=78">{{ game.title }}</h1>
-                <h1 *ngIf="game.title.length>78">{{ game.title.substring(0,78)}}...</h1>
-              </div>
-            </a>
-            <div class="price">{{ game.price }}$</div>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+      <div class="container mt-4">
+        <div class="row justify-content-between mb-4">
+          <div class="col-3">
+            <input
+            type="search"
+            class="form-control"
+            placeholder="Search..."
+            autocomplete="off"
+            style="position: relative; vertical-align: top"
+          />
           </div>
         </div>
-        <div *ngIf="games && games.length === 0 || games === undefined" class="col-md-3"><span>No game is available yet.</span></div>
+        <div
+          class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3"
+        >
+          <div *ngFor="let game of games" class="col">
+            <div class="card shadow-sm cursor-event">
+              <img
+                ngSrc="{{ game.image }}"
+                routerLink="/games/{{ game.id }}"
+                class="card-img-top"
+                width="250"
+                height="250"
+                alt="Game image"
+              />
+              <div class="card-body">
+                <div class="card-text" routerLink="/games/{{ game.id }}">
+                  <h5 *ngIf="game.title.length <= 78">{{ game.title }}</h5>
+                  <h5 *ngIf="game.title.length > 78">
+                    {{ game.title.substring(0, 78) }}...
+                  </h5>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-primary"
+                      (click)="addGameToCart(game.id, quantityInput.value)"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
+                  <input #quantityInput type="number" class="form-control w-25"  value="1" min="1" max="15"
+                    (input)="validateQuantity(quantityInput)"/>
+
+                  <small class="text-body-dark"
+                    ><b>{{ game.price }}$</b></small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="(games && games.length === 0) || games === undefined"
+            class="col-md-3"
+          >
+            <span>No game is available yet.</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

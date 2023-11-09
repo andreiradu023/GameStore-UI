@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Game} from "../../../models/game";
 import {GameService} from "../../../service/game.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {ShoppingCartService} from "../../../service/shopping-cart.service";
 
 @Component({
   selector: 'app-game-info',
@@ -10,11 +11,13 @@ import {ActivatedRoute, Params} from "@angular/router";
 })
 export class GamePageComponent implements OnInit {
   game: Game = new Game();
+  defaultImageUrl: string = 'https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg';
   id!: string;
 
   constructor(
     private gameService: GameService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit() {
@@ -26,5 +29,14 @@ export class GamePageComponent implements OnInit {
     });
   }
 
-
+  addGameToCart(id: number, quantity: number) {
+    this.shoppingCartService.addGameToCart(id, quantity).subscribe(
+      res => {
+        alert('Game added successfully')
+      },
+      error => {
+        alert(`Error: ${error.error.message}`)
+      }
+    );
+  }
 }

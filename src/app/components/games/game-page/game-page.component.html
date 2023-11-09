@@ -1,38 +1,66 @@
-<div class="section-content section-content-p30">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="product-box">
-        <div>
-          <h3>{{ game.title }}</h3>
-        </div>
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 g-3">
+    <div class="col">
+      <div class="card shadow-sm">
         <img
-          src="https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg"
-          class="img-responsive"
-          style="max-width: 100%; height: auto" alt="Game image"
+          [ngSrc]="game.image || defaultImageUrl"
+          class="card-img-top"
+          width="500"
+          height="470"
+          alt="Game image"
         />
-        <div class="price">{{ game.price }}$</div>
-        <a href="#" class="btn btn-primary">Add to cart</a>
+      </div>
+    </div>
 
-        <hr/>
-        <h4>Description</h4>
-        <p>{{ game.description }}</p>
-        <hr/>
-        <table class="table table-striped specifications-table">
-          <tbody *ngIf="game">
-          <tr>
-            <td class="col-xs-8">{{ game.genre }}</td>
-          </tr>
-          <tr>
-            <td class="col-xs-8">{{ game.platform }}</td>
-          </tr>
-          <tr>
-            <td class="col-xs-8">{{ game.releaseDate }}</td>
-          </tr>
-          </tbody>
-        </table>
+    <div class="col">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3>{{ game.title }}</h3>
+            <button class="btn btn-success" type="button">Back</button>
+          </div>
+          <h4>Description</h4>
+          <hr/>
+          <table class="table table-striped specifications-table">
+            <tbody *ngIf="game">
+            <tr>
+              <td class="col-xs-8">
+                  <span>
+                    <b> Genre: </b>
+                    {{ game.genre }}
+                  </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="col-xs-8">
+                <span> <b> Platform: </b>{{ game.platform }} </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="col-xs-8">
+                  <span
+                  ><b> ReleaseDate: </b>
+                    {{ game.releaseDate.substring(0, 10) }}</span
+                  >
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="addGameToCart(game.id, 1)"
+              >
+                Add to cart
+              </button>
+            </div>
+            <input type="number" class="form-control w-25" value="1"/>
+            <h4 class="text-body-dark">{{ game.price }}$</h4>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-

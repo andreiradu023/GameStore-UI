@@ -1,95 +1,119 @@
-<div class="col-md-4 offset-md-4" style="margin-top: 2%">
-  <h3 *ngIf="isAddMode">Add new game</h3>
-  <h3 *ngIf="!isAddMode">Update game</h3>
-  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-    <div class="form-group">
-      <label>Title</label>
-      <input
-        type="text"
-        class="form-control"
-        id="title"
-        [(ngModel)]="game.title"
-        name="title"
-      />
+<div class="container mt-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="row">
+      <h4 class="d-flex justify-content-center align-items-center">
+        <span *ngIf="isAddMode">Add new game</span>
+        <span *ngIf="!isAddMode">Update game</span>
+      </h4>
     </div>
 
-    <div class="form-group">
-      <label>Platform</label>
-      <input
-        type="text"
-        class="form-control"
-        id="platform"
-        [(ngModel)]="game.platform"
-        name="platform"
-      />
-    </div>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="game.title"
+          name="title"
+        />
+      </div>
 
-    <div class="form-group">
-      <label>Genre</label>
-      <input
-        type="text"
-        class="form-control"
-        id="genre"
-        [(ngModel)]="game.genre"
-        name="genre"
-      />
-    </div>
+      <div class="form-group">
+        <label>Platform</label>
+        <input
+          type="text"
+          class="form-control"
+          id="platform"
+          [(ngModel)]="game.platform"
+          name="platform"
+        />
+      </div>
 
-    <div class="form-group">
-      <label>Description</label>
-      <input
-        type="text"
-        class="form-control"
-        id="description"
-        [(ngModel)]="game.description"
-        name="description"
-      />
-    </div>
+      <div class="form-group">
+        <label>Genre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="genre"
+          [(ngModel)]="game.genre"
+          name="genre"
+        />
+      </div>
 
-    <div class="form-group">
-      <label>Price</label>
-      <input
-        type="number"
-        class="form-control"
-        id="price"
-        [(ngModel)]="game.price"
-        name="price"
-      />
-    </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="game.description"
+          name="description"
+          rows="7"
+        ></textarea>
+      </div>
 
-    <div class="form-group">
-      <label>Image</label>
-      <input
-        type="text"
-        class="form-control"
-        id="image"
-        [(ngModel)]="game.image"
-        name="image"
-      />
-    </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          [(ngModel)]="game.price"
+          name="price"
+        />
+      </div>
 
-    <div class="form-group">
-      <label>Release Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="releaseDate"
-        [(ngModel)]="game.releaseDate"
-        name="releaseDate"
-      />
-    </div>
+      <div class="form-group">
+        <label>Image</label>
+        <input
+          type="text"
+          class="form-control"
+          id="image"
+          [(ngModel)]="game.image"
+          name="image"
+        />
+      </div>
 
-    <div class="form-group">
-      <label>Stock Quantity</label>
-      <input
-        type="number"
-        class="form-control"
-        id="stockQuantity"
-        [(ngModel)]="game.stockQuantity"
-        name="stockQuantity"
-      />
-    </div>
+      <div class="form-group">
+        <label>Release Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="releaseDate"
+          [(ngModel)]="game.releaseDate"
+          name="releaseDate"
+        />
+      </div>
 
-    <button class="btn btn-success" type="submit" style="margin-bottom: 50px;">Submit</button>
-  </form>
+      <div class="form-group">
+        <label>Stock Quantity</label>
+        <input
+          type="number"
+          class="form-control"
+          id="stockQuantity"
+          [(ngModel)]="game.stockQuantity"
+          name="stockQuantity"
+        />
+      </div>
+
+      <div class="row justify-content-between mt-2">
+        <div class="col-4">
+          <button
+            class="btn btn-success w-100"
+            type="button"
+            (click)="goToGameList()"
+          >
+            Back
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+            class="btn btn-primary w-100"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

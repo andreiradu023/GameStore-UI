@@ -29,6 +29,8 @@ export class OrderEditComponent implements OnInit {
         this.order = data;
       });
     }
+
+    console.log('order: ', this.order)
   }
 
   onSubmit(form: NgForm) {
@@ -63,6 +65,6 @@ export class OrderEditComponent implements OnInit {
   }
 
   goToOrderList() {
-    this.router.navigate(['/orders']);
+    this.router.navigate(['admin/orders']);
   }
 }

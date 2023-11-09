@@ -1,37 +1,149 @@
-<div style="background-color: red;">
-  <div class="container-fluid" style="margin-top: 10px;">
-    <button type="button" class="btn btn-success" (click)="onNewOrder()">New User</button>
-    <button type="button" class="btn btn-success" style="margin-left: 10px;"
-            (click)="refreshOrders()">
-      <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
-      <i *ngIf="!refreshing" class="fas fa-sync"></i>
-    </button>
-    <table class="table table-borderless table-hover">
+<div class="table-responsive container-fluid mt-3">
+  <div class="row justify-content-between mt-2">
+    <div class="col-4">
+      <div class="d-flex">
+        <h3 class="me-2">Orders table:</h3>
+        <button
+          type="button"
+          class="btn btn-sm btn-success"
+          (click)="refreshOrders()"
+        >
+          <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
+          <i *ngIf="!refreshing" class="fas fa-sync"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-2">
+      <input
+        type="search"
+        class="form-control"
+        placeholder="Search..."
+        autocomplete="off"
+        style="position: relative; vertical-align: top"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-sm table-striped table-hover caption-top">
       <thead>
       <tr class="text-center">
         <th scope="col">Id</th>
         <th scope="col">User</th>
         <th scope="col">Order Date</th>
         <th scope="col">Total Price</th>
-        <th scope="col">Order Items</th>
+        <th scope="col" colspan="3">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr class="text-center" *ngFor="let orders of orders">
         <td>{{ orders.id }}</td>
-        <td>{{ orders.user.firstName }} {{orders.user.lastName}}</td>
-        <td>{{ orders.orderDate }}</td>
-        <td>{{ orders.totalPrice }}</td>
-        <td>{{ orders.orderItems }}</td>
-        <button type="button" (click)="onViewDetails(orders.id)" class="btn btn-info">
-          <i class="fas fa-book-open"></i></button>
-        <button type="button" style="margin-left: 10px;" (click)="onEdit(orders.id)" class="btn btn-primary">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button type="button" style="margin-left: 10px;" (click)="onDelete(orders.id)" class="btn btn-danger">
-          <i class="fas fa-trash"></i></button>
+        <td>{{ orders.user.firstName }} {{ orders.user.lastName }}</td>
+        <td>{{ orders.orderDate.toString().substring(0, 10) }}</td>
+        <td>{{ orders.totalPrice }}$</td>
+
+        <td>
+          <button
+            type="button"
+            (click)="onViewDetails(orders.id)"
+            class="btn btn-sm btn-primary"
+          >
+            <i class="fas fa-book-open"></i>
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            style="margin-left: 10px"
+            (click)="onEdit(orders.id)"
+            class="btn btn-sm btn-success"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            style="margin-left: 10px"
+            (click)="onDelete(orders.id)"
+            class="btn btn-sm btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="row justify-content-between mt-2">
+    <div class="col-2">
+      <div class="input-group mb-3">
+        <select class="form-select" id="inputGroupSelect02">
+          <option selected>Table Size...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">5</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex justify-content-end">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Delete order list: xyz
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this item / items?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">Yes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -64,6 +64,6 @@ export class UserEditComponent implements OnInit {
   }
 
   goToUserList() {
-    this.router.navigate(['/users']);
+    this.router.navigate(['admin/users']);
   }
 }

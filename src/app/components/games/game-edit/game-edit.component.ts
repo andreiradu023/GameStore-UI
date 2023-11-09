@@ -31,16 +31,16 @@ export class GameEditComponent implements OnInit {
     }
   }
 
-    onSubmit(form: NgForm) {
-      if (form.invalid) {
-        return;
-      }
-      if (this.isAddMode) {
-        this.createGame();
-      } else {
-        this.updateGame();
-      }
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      return;
     }
+    if (this.isAddMode) {
+      this.createGame();
+    } else {
+      this.updateGame();
+    }
+  }
 
   createGame() {
     this.gameService.createGames(this.game).subscribe(
@@ -63,7 +63,7 @@ export class GameEditComponent implements OnInit {
   }
 
   goToGameList() {
-    this.router.navigate(['/games']);
+    this.router.navigate(['admin/games']);
   }
 
 }

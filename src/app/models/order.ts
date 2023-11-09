@@ -10,7 +10,8 @@ export class Order {
 }
 
 export class OrderItems {
-  game!: Game;
+  gameId!: Game;
   quantity!: number;
   unitPrice!: number;
+  subtotal!: number;
 }
