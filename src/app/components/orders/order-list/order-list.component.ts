@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Order} from "../../../models/order";
 import {Subscription} from "rxjs";
 import {OrderService} from "../../../service/order.service";

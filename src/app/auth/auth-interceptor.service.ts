@@ -8,7 +8,8 @@ import {API_URL} from "../../app.constants";
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     if (req.url.includes(`${API_URL}/basic-auth`)) {
@@ -16,7 +17,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     }
     this.authService.loadToken();
     const token = this.authService.getToken();
-    const request = req.clone({ setHeaders: { Authorization: token } });
+    const request = req.clone({setHeaders: {Authorization: token}});
     return next.handle(request);
   }
 
