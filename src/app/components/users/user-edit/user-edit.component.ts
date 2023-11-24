@@ -45,21 +45,19 @@ export class UserEditComponent implements OnInit {
 
   createUser() {
     this.userService.createUser(this.user).subscribe(
-      (data) => {
-        console.log('inside create user', data);
+      () => {
         this.goToUserList();
       },
-      (error) => console.log(error)
+      (error) => console.error(error)
     );
   }
 
   updateUser() {
     this.userService.updateUser(this.user, this.id).subscribe(
-      (data) => {
-        console.log('inside update user', data);
+      () => {
         this.goToUserList();
       },
-      (error) => console.log(error)
+      (error) => console.error(error)
     );
   }
 

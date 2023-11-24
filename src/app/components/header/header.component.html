@@ -31,7 +31,6 @@
                 version="1.1"
                 id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
                 width="30"
@@ -49,7 +48,7 @@
               </svg>
             </a>
           </li>
-          <li class="nav-item mbr">
+          <li class="nav-item mbr" *ngIf="isAdmin()">
             <ul class="navbar-nav navbar-right">
               <div class="dropdown">
                 <button

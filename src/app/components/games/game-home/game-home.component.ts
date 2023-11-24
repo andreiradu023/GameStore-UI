@@ -14,11 +14,9 @@ export class GameHomeComponent implements OnInit, OnDestroy {
   games!: Game[];
   subscriptions: Subscription[] = [];
 
-
-  constructor(
-    private gameService: GameService,
-    private route: ActivatedRoute,
-    private shoppingCartService: ShoppingCartService) {
+  constructor(private gameService: GameService,
+              private route: ActivatedRoute,
+              private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit(): void {
@@ -35,13 +33,8 @@ export class GameHomeComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.gameService.getAllGames().subscribe(
         data => {
-          console.log(data);
           this.games = data;
-        }, error => {
-          console.log(this.games)
-          console.log(error);
-        }
-      )
+        })
     );
   }
 
@@ -56,8 +49,9 @@ export class GameHomeComponent implements OnInit, OnDestroy {
 
   addGameToCart(id: number, quantity: string) {
     this.shoppingCartService.addGameToCart(id, parseInt(quantity)).subscribe(
-      res => {
-        alert('Game added successfully')
+      () => {
+        const game = this.games.find(game => game.id === id);
+        alert(game.title + ' x' + quantity + ' added successfully')
       },
       error => {
         alert(`Error: ${error.error.message}`)

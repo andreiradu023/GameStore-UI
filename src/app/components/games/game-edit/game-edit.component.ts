@@ -44,21 +44,19 @@ export class GameEditComponent implements OnInit {
 
   createGame() {
     this.gameService.createGames(this.game).subscribe(
-      (data) => {
-        console.log('inside create game', data);
+      () => {
         this.goToGameList();
       },
-      (error) => console.log(error)
+      (error) => console.error(error)
     );
   }
 
   updateGame() {
     this.gameService.updateGames(this.game, this.id).subscribe(
-      (data) => {
-        console.log('inside update game', data);
+      () => {
         this.goToGameList();
       },
-      (error) => console.log(error)
+      (error) => console.error(error)
     );
   }
 

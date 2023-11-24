@@ -28,6 +28,7 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {AuthInterceptorService} from "./auth/auth-interceptor.service";
 import {NgOptimizedImage} from "@angular/common";
 import {CheckoutComponent} from './components/checkout/checkout.component';
+import {RegistrationComponent} from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {CheckoutComponent} from './components/checkout/checkout.component';
     ShoppingCartComponent,
     LoginComponent,
     LogoutComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

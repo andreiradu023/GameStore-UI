@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.isLoggedIn.subscribe(value => {
       this.isAuthenticated = value;
     });
-    console.log(this.isAuthenticated);
     this.isAuthenticated = this.authService.isUserLoggedIn();
   }
 
@@ -32,5 +31,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout();
     this.router.navigate(["/"]);
+  }
+
+  isAdmin() {
+    let roles = this.authService.getUserFromLocalCache().roles;
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name.includes("ADMIN"))
+        return true;
+    }
+    return false;
   }
 }

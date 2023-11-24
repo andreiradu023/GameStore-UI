@@ -1,20 +1,32 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
 import {Order} from "../models/order";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {API_URL} from "../../app.constants";
+import {Page} from "../models/page";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  orders: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>([]);
 
   constructor(private http: HttpClient) {
   }
 
   getAllOrders() {
     return this.http.get<Order[]>(`${API_URL}/orders`);
+  }
+
+  getAllOrdersByPage(page: number, pageSize: number, sortField: string, sortDir: string, keyword: string) {
+    let params = new HttpParams({
+      fromObject: {
+        pageSize,
+        sortField,
+        sortDir,
+        keyword
+      },
+    });
+
+    return this.http.get<Page<Order>>(`${API_URL}/orders/page/${page}`, {params});
   }
 
   getOrders(id: string) {

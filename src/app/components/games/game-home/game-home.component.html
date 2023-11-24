@@ -23,12 +23,12 @@
         <div class="row justify-content-between mb-4">
           <div class="col-3">
             <input
-            type="search"
-            class="form-control"
-            placeholder="Search..."
-            autocomplete="off"
-            style="position: relative; vertical-align: top"
-          />
+              type="search"
+              class="form-control"
+              placeholder="Search..."
+              autocomplete="off"
+              style="position: relative; vertical-align: top"
+            />
           </div>
         </div>
         <div
@@ -61,11 +61,11 @@
                       Add to cart
                     </button>
                   </div>
-                  <input #quantityInput type="number" class="form-control w-25"  value="1" min="1" max="15"
-                    (input)="validateQuantity(quantityInput)"/>
+                  <input #quantityInput type="number" class="form-control w-25" value="1" min="1" max="15"
+                         (input)="validateQuantity(quantityInput)"/>
 
                   <small class="text-body-dark"
-                    ><b>{{ game.price }}$</b></small
+                  ><b>{{ game.price }}$</b></small
                   >
                 </div>
               </div>

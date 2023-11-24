@@ -12,7 +12,6 @@ import {NgForm} from "@angular/forms";
 export class OrderEditComponent implements OnInit {
   id!: string;
   order: Order = new Order();
-  isAddMode!: boolean;
 
   constructor(
     private orderService: OrderService,
@@ -22,45 +21,25 @@ export class OrderEditComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.isAddMode = !this.id;
 
-    if (!this.isAddMode) {
-      this.orderService.getOrders(this.id).subscribe((data) => {
-        this.order = data;
-      });
-    }
-
-    console.log('order: ', this.order)
+    this.orderService.getOrders(this.id).subscribe((data) => {
+      this.order = data;
+    });
   }
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    if (this.isAddMode) {
-      this.createOrder();
-    } else {
-      this.updateOrder();
-    }
-  }
-
-  createOrder() {
-    this.orderService.createOrders(this.order).subscribe(
-      (data) => {
-        console.log('inside create order', data);
-        this.goToOrderList();
-      },
-      (error) => console.log(error)
-    );
+    this.updateOrder();
   }
 
   updateOrder() {
     this.orderService.updateOrders(this.order, this.id).subscribe(
-      (data) => {
-        console.log('inside update order', data);
+      () => {
         this.goToOrderList();
       },
-      (error) => console.log(error)
+      (error) => console.error(error)
     );
   }
 

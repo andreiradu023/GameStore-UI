@@ -1,19 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Order} from "../../../models/order";
-import {Subscription} from "rxjs";
+import {BehaviorSubject, Subscription} from "rxjs";
 import {OrderService} from "../../../service/order.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Page} from "../../../models/page";
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css']
 })
-export class OrderListComponent {
-  orders!: Order[];
+export class OrderListComponent implements OnInit, OnDestroy {
+  orderPageSubject = new BehaviorSubject<Page<Order>>(null);
+  currentPageSubject = new BehaviorSubject<number>(1);
+  keyword: string = "";
+  pageSize: number = 5;
   refreshing = false;
   subscriptions: Subscription[] = [];
-  message: string | undefined;
+  orderToDelete: Order;
 
   constructor(
     private orderService: OrderService,
@@ -23,10 +27,11 @@ export class OrderListComponent {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.orderService.orders.subscribe((data) => {
-        this.orders = data;
+      this.orderService.getAllOrdersByPage(1, this.pageSize, "id", "asc", this.keyword).subscribe(page => {
+        this.orderPageSubject.next(page);
+        this.currentPageSubject.next(1)
       })
-    );
+    )
     this.refreshOrders();
   }
 
@@ -37,19 +42,13 @@ export class OrderListComponent {
   refreshOrders() {
     this.refreshing = true;
     this.subscriptions.push(
-      this.orderService.getAllOrders().subscribe(
-        (response) => {
-          this.orderService.orders.next(response);
-          console.log(response);
-          this.orders = response;
-          this.refreshing = false;
-          this.message = undefined;
-        },
-        (error) => {
-          this.refreshing = false;
-          console.log(error);
-        }
-      )
+      this.orderService.getAllOrdersByPage(this.currentPageSubject.value, this.pageSize, "id", "asc", this.keyword).subscribe(page => {
+        this.orderPageSubject.next(page);
+        this.refreshing = false;
+      }, error => {
+        this.refreshing = false;
+        console.error(error);
+      })
     );
   }
 
@@ -66,10 +65,29 @@ export class OrderListComponent {
   }
 
   onDelete(id: number) {
-    this.orderService.deleteOrders(id).subscribe(response => {
-      console.log(response);
-      this.message = `Order ${id} has been deleted!`;
+    this.orderService.deleteOrders(id).subscribe(() => {
       this.refreshOrders();
     });
+  }
+
+  goToPage(keyword?: string, pageNumber: number = 1,) {
+    this.orderService.getAllOrdersByPage(pageNumber, this.pageSize, "id", "asc", keyword).subscribe(data => {
+      this.orderPageSubject.next(data);
+      this.currentPageSubject.next(pageNumber);
+    });
+  }
+
+  goToNextOrPreviousPage(direction?: string, keyword?: string) {
+    this.goToPage(keyword, direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1)
+  }
+
+  onSelected(pageSize: string) {
+    this.pageSize = parseInt(pageSize);
+    this.refreshOrders();
+  }
+
+  onSearch(keyword: string) {
+    this.keyword = keyword;
+    this.goToPage(keyword);
   }
 }

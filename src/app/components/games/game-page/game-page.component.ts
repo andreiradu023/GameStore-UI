@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Game} from "../../../models/game";
 import {GameService} from "../../../service/game.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ShoppingCartService} from "../../../service/shopping-cart.service";
 
 @Component({
@@ -17,6 +17,7 @@ export class GamePageComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private route: ActivatedRoute,
+    private router: Router,
     private shoppingCartService: ShoppingCartService) {
   }
 
@@ -29,14 +30,27 @@ export class GamePageComponent implements OnInit {
     });
   }
 
-  addGameToCart(id: number, quantity: number) {
-    this.shoppingCartService.addGameToCart(id, quantity).subscribe(
-      res => {
-        alert('Game added successfully')
+  addGameToCart(id: number, quantity: string) {
+    this.shoppingCartService.addGameToCart(id, parseInt(quantity)).subscribe(
+      () => {
+        alert(this.game.title + ' x' + quantity + ' added successfully')
       },
       error => {
         alert(`Error: ${error.error.message}`)
       }
     );
+  }
+
+  validateQuantity(inputElement: HTMLInputElement) {
+    if (parseInt(inputElement.value) < 0) {
+      inputElement.value = '1';
+    }
+    if (parseInt(inputElement.value) > 15) {
+      inputElement.value = '15';
+    }
+  }
+
+  goToGamePage() {
+    this.router.navigate(['games'])
   }
 }

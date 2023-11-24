@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     const password = form.value.password;
     this.subscriptions.push(
       this.authService.handleAuthentication(email, password).subscribe(response => {
-        console.log(response.headers);
 
         const token = response.headers.get('Authorization');
 
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.invalidLogin = false;
         this.isLoading = false;
       }, errorMessage => {
-        console.log('authentication error', errorMessage);
+        console.error('authentication error', errorMessage);
         this.invalidLogin = true;
         this.isLoading = false;
       })

@@ -4,7 +4,7 @@ import {Game} from "./game";
 export class Order {
   id!: number;
   user!: User;
-  orderDate!: Date;
+  orderDate!: string;
   totalPrice!: number;
   orderItems!: OrderItems[];
 }

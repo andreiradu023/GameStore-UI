@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../models/user";
-import {Subscription} from "rxjs";
+import {BehaviorSubject, Subscription} from "rxjs";
 import {UserService} from "../../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Page} from "../../../models/page";
 
 @Component({
   selector: 'app-user-list',
@@ -10,23 +11,26 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  users!: User[];
+  userPageSubject = new BehaviorSubject<Page<User>>(null);
+  currentPageSubject = new BehaviorSubject<number>(1);
+  keyword: string = "";
+  pageSize: number = 5;
   refreshing = false;
   subscriptions: Subscription[] = [];
-  message: string | undefined;
+  userToDelete: User;
 
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private route: ActivatedRoute) {
+  constructor(private userService: UserService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.userService.users.subscribe((data) => {
-        this.users = data;
+      this.userService.getAllUsersByPage(1, this.pageSize, "id", "asc", this.keyword).subscribe(page => {
+        this.userPageSubject.next(page);
+        this.currentPageSubject.next(1)
       })
-    );
+    )
     this.refreshUsers();
   }
 
@@ -37,19 +41,13 @@ export class UserListComponent implements OnInit, OnDestroy {
   refreshUsers() {
     this.refreshing = true;
     this.subscriptions.push(
-      this.userService.getAllUsers().subscribe(
-        (response) => {
-          this.userService.users.next(response);
-          console.log(response);
-          this.users = response;
-          this.refreshing = false;
-          this.message = undefined;
-        },
-        (error) => {
-          this.refreshing = false;
-          console.log(error);
-        }
-      )
+      this.userService.getAllUsersByPage(this.currentPageSubject.value, this.pageSize, "id", "asc", this.keyword).subscribe(page => {
+        this.userPageSubject.next(page);
+        this.refreshing = false;
+      }, error => {
+        this.refreshing = false;
+        console.error(error);
+      })
     );
   }
 
@@ -66,11 +64,29 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: number) {
-    this.userService.deleteUser(id).subscribe(response => {
-      console.log(response);
-      this.message = `User ${id} has been deleted!`;
+    this.userService.deleteUser(id).subscribe(() => {
       this.refreshUsers();
     });
   }
 
+  goToPage(keyword?: string, pageNumber: number = 1,) {
+    this.userService.getAllUsersByPage(pageNumber, this.pageSize, "id", "asc", keyword).subscribe(data => {
+      this.userPageSubject.next(data);
+      this.currentPageSubject.next(pageNumber);
+    });
+  }
+
+  goToNextOrPreviousPage(direction?: string, keyword?: string) {
+    this.goToPage(keyword, direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1)
+  }
+
+  onSelected(pageSize: string) {
+    this.pageSize = parseInt(pageSize);
+    this.refreshUsers();
+  }
+
+  onSearch(keyword: string) {
+    this.keyword = keyword;
+    this.goToPage(keyword);
+  }
 }

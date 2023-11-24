@@ -1,16 +1,14 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
 import {Game} from "../models/game";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {API_URL} from "../../app.constants";
+import {Page} from "../models/page";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  games: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>([]);
-  gameList: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>([]);
 
   constructor(private http: HttpClient) {
   }
@@ -19,8 +17,17 @@ export class GameService {
     return this.http.get<Game[]>(`${API_URL}/games`);
   }
 
-  getAllGamesByPage(page: number) {
-    return this.http.get<Game[]>(`${API_URL}/games/page/${page}`);
+  getAllGamesByPage(page: number, pageSize: number, sortField: string, sortDir: string, keyword: string) {
+    let params = new HttpParams({
+      fromObject: {
+        pageSize,
+        sortField,
+        sortDir,
+        keyword
+      },
+    });
+
+    return this.http.get<Page<Game>>(`${API_URL}/games/page/${page}`, {params});
   }
 
   getGames(id: string) {

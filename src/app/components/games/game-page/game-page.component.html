@@ -17,7 +17,7 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center">
             <h3>{{ game.title }}</h3>
-            <button class="btn btn-success" type="button">Back</button>
+            <button class="btn btn-success" type="button" (click)="goToGamePage()">Back</button>
           </div>
           <h4>Description</h4>
           <hr/>
@@ -40,7 +40,7 @@
               <td class="col-xs-8">
                   <span
                   ><b> ReleaseDate: </b>
-                    {{ game.releaseDate.substring(0, 10) }}</span
+                    {{ game.releaseDate}}</span
                   >
               </td>
             </tr>
@@ -51,12 +51,13 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="addGameToCart(game.id, 1)"
+                (click)="addGameToCart(game.id, quantityInput.value)"
               >
                 Add to cart
               </button>
             </div>
-            <input type="number" class="form-control w-25" value="1"/>
+            <input #quantityInput type="number" class="form-control w-25" value="1" min="1" max="15"
+                   (input)="validateQuantity(quantityInput)"/>
             <h4 class="text-body-dark">{{ game.price }}$</h4>
           </div>
         </div>

@@ -51,7 +51,6 @@ export class AuthService {
   isUserLoggedIn() {
     this.loadToken();
     if (this.token != null && this.token !== '') {
-      // check decode == user && tokenNotExpired
       this.isLoggedIn.next(true);
       return true;
     } else {

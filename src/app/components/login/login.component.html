@@ -8,7 +8,7 @@
                ngModel #emailInput="ngModel" placeholder="Enter email" required email>
       </div>
       <span class="help-block" style="color: red;"
-            *ngIf="emailInput.invalid && emailInput.touched">Please enter a email</span>
+            *ngIf="emailInput.invalid && emailInput.touched">Please enter an email</span>
       <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" id="password" class="form-control" name="password"
@@ -23,6 +23,9 @@
           <span *ngIf="isLoading">Loading...</span>
           <span *ngIf="!isLoading">Login</span>
         </button>
+      </div>
+      <div class="container mt-2">
+        Don't have an account? <br> Click <a routerLink="/register">here</a> to register
       </div>
     </form>
   </div>
