@@ -1,27 +1,75 @@
-# GamestoreUi
+# 🎮 Online Game Store (E-Commerce Platform)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
+This project is a **full-stack e-commerce application specialized in selling games**, developed as part of my Java Developer training.  
+It is split into two repositories: one for the **backend API** (Spring Boot) and one for the **frontend UI** (Angular).
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Features
+- User authentication and role-based access (Admin / User)
+- Game catalog with details and categories
+- Shopping cart and checkout process
+- Order management for users and admins
+- RESTful API integration between frontend and backend
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🛠 Tech Stack
+### Backend (API)
+- Java 17
+- Spring Boot
+- REST APIs
+- MySQL
+- Hibernate / JPA
+- Maven
 
-## Build
+👉 [Backend Repository](https://github.com/andreiradu023/GameStore-API)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Frontend (UI)
+- Angular
+- TypeScript
+- HTML, CSS, Bootstrap
+- REST API integration
 
-## Running unit tests
+👉 [Frontend Repository](https://github.com/andreiradu023/GameStore-UI)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## ▶️ How to Run
+### Backend
+1. Clone the backend repo  
+2. Configure MySQL in `application.properties`  
+3. Run:  
+   ```bash
+   mvn spring-boot:run
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+API available at http://localhost:8080/api/...
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Frontend
+
+Clone the frontend repo
+
+Install dependencies:
+
+npm install
+
+
+Run Angular dev server:
+
+ng serve
+
+
+UI available at http://localhost:4200
+
+📌 Future Improvements
+
+Payment integration
+
+Dockerization (backend + frontend)
+
+Unit and integration testing (JUnit, Mockito)
+
+Advanced search and filtering for games
+
+OAuth
